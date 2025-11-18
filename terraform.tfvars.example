@@ -1,0 +1,5 @@
+# Copy this to terraform.tfvars and customize
+
+aws_region   = "eu-north-1"
+project_name = "secrets-demo"
+environment  = "dev"
