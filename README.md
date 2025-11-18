@@ -1,11 +1,11 @@
-# 🔐 Project 1: AWS Secrets Manager for SSH Keys
+# AWS Secrets Manager for SSH Keys
 
 **Problem:** Developers hardcode SSH keys in code → keys leak in Git → security breach  
 **Solution:** Store keys in AWS Secrets Manager → encrypted, audited, never in code
 
 ---
 
-## What You'll Learn
+## this repo covers
 
 ✅ How AWS Secrets Manager works  
 ✅ How to store SSH keys securely  
@@ -27,11 +27,7 @@ IAM Policy (who can read it)
 IAM Role (for EC2 to use)
 ```
 
-**Resources Created:** 4  
-**Cost:** ~$0.40/month per secret  
-**Time:** 30 minutes  
 
----
 
 ## Quick Start
 
@@ -93,7 +89,7 @@ aws secretsmanager get-secret-value \
 
 ## How It Works
 
-### ❌ The Insecure Way (DON'T DO THIS)
+### The Insecure Way 
 
 ```bash
 # Hardcoded in code
@@ -104,8 +100,7 @@ resource "aws_instance" "web" {
 # Or worse - in user data:
 user_data = <<-EOF
   #!/bin/bash
-  echo "ssh-rsa AAAAB3Nz... my-key" > ~/.ssh/id_rsa  # EXPOSED!
-EOF
+ 
 ```
 
 **Problems:**
@@ -114,7 +109,7 @@ EOF
 - Can't rotate keys easily
 - No audit trail of who accessed keys
 
-### ✅ The Secure Way (THIS PROJECT)
+###  The Secure Way (THIS PROJECT)
 
 ```bash
 # In Terraform: Just create the secret placeholder
@@ -248,21 +243,13 @@ aws cloudtrail lookup-events \
 
 ---
 
-## Cost Breakdown
 
-| Item | Cost |
-|------|------|
-| Secret storage | $0.40/month per secret |
-| API calls | $0.05 per 10,000 calls |
-| **Total** | **~$0.40/month** |
-
-💡 **Tip:** First 30 days are free!
 
 ---
 
 ## Common Mistakes
 
-### ❌ Mistake 1: Storing Secret Value in Terraform
+###  Mistake 1: Storing Secret Value in Terraform
 
 ```hcl
 # DON'T DO THIS!
@@ -272,7 +259,7 @@ resource "aws_secretsmanager_secret_version" "bad" {
 }
 ```
 
-### ✅ Correct: Use Placeholder + Script
+###  Correct: Use Placeholder + Script
 
 ```hcl
 # DO THIS!
@@ -286,7 +273,7 @@ resource "aws_secretsmanager_secret_version" "good" {
 }
 ```
 
-### ❌ Mistake 2: Overly Broad IAM Policy
+###  Mistake 2: Overly Broad IAM Policy
 
 ```json
 {
@@ -296,7 +283,7 @@ resource "aws_secretsmanager_secret_version" "good" {
 }
 ```
 
-### ✅ Correct: Least Privilege
+### Correct: Least Privilege
 
 ```json
 {
@@ -335,11 +322,7 @@ After mastering this:
 
 ---
 
-## Interview Talking Points
 
-> "I built a secure secrets management system using AWS Secrets Manager and Terraform. Instead of hardcoding credentials, I created an automated workflow where secrets are encrypted at rest with KMS, access is controlled via least-privilege IAM policies, and all access is logged to CloudTrail for audit compliance. EC2 instances retrieve credentials programmatically using IAM roles, eliminating the need for credentials in code or configuration files."
-
----
 
 ## Resources
 
@@ -347,8 +330,3 @@ After mastering this:
 - [AWS Secrets Manager Best Practices](https://docs.aws.amazon.com/secretsmanager/latest/userguide/best-practices.html)
 - [Terraform AWS Provider - Secrets Manager](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret)
 
----
-
-**⭐ If this helped you, star the repo!**
-
-**Next:** [Project 2 - CloudTrail Audit Logging →](../terraform-cloudtrail/README.md)
