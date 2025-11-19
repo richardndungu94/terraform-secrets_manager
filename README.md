@@ -331,9 +331,27 @@ After mastering this:
 - [Terraform AWS Provider - Secrets Manager](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret)
 
 
+## Index
+**IMAGES**
+
+Image 1
+
+![Alt text](/images/IAMsec1.png)
 
 
+Image 2
+
+![Alt text](/images/IAMsec2.png)
 
 
+Image 3
 
+
+![Alt text](/images/IAMsec3.png)
+
+
+Image 4
+
+
+![Alt text](/images/IAMsec5.png)
 
